@@ -2,9 +2,11 @@
 using RabbitMQ.Client.Events;
 using System.Text;
 
-ConnectionFactory factory = new();
-factory.Uri = new Uri("amqp://guest:guest@localhost:5672");
-factory.ClientProvidedName = "Rabbit Receiver1 App";
+ConnectionFactory factory = new()
+{
+    Uri = new Uri("amqp://guest:guest@localhost:5672"),
+    ClientProvidedName = "Rabbit Receiver1 App"
+};
 
 IConnection connection = factory.CreateConnection();
 IModel channel = connection.CreateModel();

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RabbitSender")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e097c34d29b5245fd97c66824c56473465261756")]
 [assembly: System.Reflection.AssemblyProductAttribute("RabbitSender")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RabbitSender")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
