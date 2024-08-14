@@ -23,10 +23,9 @@ channel.BasicQos(0,1,false);
 var consumer = new EventingBasicConsumer(channel);
 consumer.Received += (sender, args) =>
 {
-    Task.Delay(TimeSpan.FromSeconds(5)).Wait();
     var body = args.Body.ToArray();
     var message = Encoding.UTF8.GetString(body);
-    Console.WriteLine("RabbitReceiver1 Message: {0} --> Slower", message);
+    Console.WriteLine($"RabbitReceiver1: {message}");
     
     channel.BasicAck(args.DeliveryTag, false);  
 };

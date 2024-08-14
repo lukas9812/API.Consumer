@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace API.Receiver;
+namespace RabbitReceiver1.Model;
 
 public class Country
 {

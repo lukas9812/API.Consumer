@@ -1,18 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Hosting;
 using RabbitSender;
-using RabbitSender.Services;
 
-var serviceProvider = new ServiceCollection()
-    .AddLogging()
-    .AddSingleton<IPublisher, PublisherService>()
-    .BuildServiceProvider();
+var builder = Host.CreateApplicationBuilder(args);
 
-//configure console logging
-serviceProvider.GetService<ILoggerFactory>();
+builder.Services.AddMyServices();
+builder.Logging.AddLogging();
 
-var logger = serviceProvider.GetService<ILoggerFactory>()!
-    .CreateLogger<Program>();
+using var host = builder.Build();
 
-logger.LogDebug("Starting application");
+await host.RunAsync();
 

@@ -1,38 +1,43 @@
-﻿using RabbitMQ.Client;
+﻿using System.Diagnostics.CodeAnalysis;
+using RabbitMQ.Client;
+using RabbitSender.Interfaces;
 
 namespace RabbitSender.Services;
 
-public class PublisherService : IPublisher
+[SuppressMessage("ReSharper", "ConvertToPrimaryConstructor")]
+public class PublisherService : IPublisherService, IDisposable
 {
-    private ApiCallerService? ApiCaller { get; set; }
+    private readonly IApiCallerService _apiCallerService;
     
+    private readonly IModel _model;
+    private readonly IConnection _connection;
+
+    public PublisherService(IApiCallerService apiCallerService, IRabbitMqService rabbitMqService)
+    {
+        _apiCallerService = apiCallerService;
+        _connection = rabbitMqService.CreateChannel();
+        _model = _connection.CreateModel();
+    }
+
     public async Task PublishCountryData()
     {
-        ConnectionFactory factory = new()
-        {
-            Uri = new Uri("amqp://guest:guest@localhost:5672"),
-            ClientProvidedName = "Rabbit Publisher App"
-        };
-
-        IConnection connection = factory.CreateConnection();
-        IModel channel = connection.CreateModel();
-
         var exchangeName = "DemoExchange";
         var routingKey = "demo-routing-key";
         var queueName = "DemoQueue";
 
-        channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
-        channel.QueueDeclare(queueName, false, false,false, null);
-        channel.QueueBind(queueName, exchangeName, routingKey, null);
-
-        ApiCaller ??= new ApiCallerService();
+        _model.ExchangeDeclare(exchangeName, ExchangeType.Direct);
+        _model.QueueDeclare(queueName, false, false,false, null);
+        _model.QueueBind(queueName, exchangeName, routingKey, null);
         
-        var countryJsonInfo = await ApiCaller!.GetCountryJsonInfo();
+        var countryJsonInfo = await _apiCallerService.GetCountryJsonInfo();
         
-        channel.BasicPublish(exchangeName, routingKey, null, countryJsonInfo);
+        _model.BasicPublish(exchangeName, routingKey, null, countryJsonInfo);
         Thread.Sleep(1000);
+    }
 
-        channel.Close();
-        connection.Close();
+    public void Dispose()
+    {
+        // _model.Dispose();
+        // _connection.Dispose();
     }
 }
