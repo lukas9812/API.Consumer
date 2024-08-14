@@ -2,5 +2,5 @@
 
 public class AppSettings
 {
-    public RabbitMq RabbitMq { get; } = new();
+    public RabbitMq? RabbitMq { get; }
 }

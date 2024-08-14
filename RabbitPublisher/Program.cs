@@ -10,7 +10,6 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnCh
     .AddJsonFile("appsettings.json", optional: true)
     .AddEnvironmentVariables();
 
-
 using var host = builder.Build();
 
 await host.RunAsync();

@@ -20,7 +20,7 @@ public class RabbitMqService : IRabbitMqService
     {
         ConnectionFactory factory = new()
         {
-            Uri = new Uri(_settings.RabbitMq.RabbitUri),
+            Uri = new Uri(_settings.RabbitMq!.RabbitUri),
             ClientProvidedName = "Rabbit Publisher App"
         };
 

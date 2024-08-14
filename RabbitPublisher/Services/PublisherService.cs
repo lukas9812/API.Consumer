@@ -27,6 +27,8 @@ public class PublisherService : IPublisherService, IDisposable
     public async Task PublishCountryData()
     {
         var rabbitSettings = _settings.RabbitMq;
+        if (rabbitSettings is null)
+            throw new ApplicationException("Application settings are not initialized!");
 
         _model.ExchangeDeclare(rabbitSettings.ExchangeName, ExchangeType.Direct);
         _model.QueueDeclare(rabbitSettings.QueueName, false, false, false, null);
