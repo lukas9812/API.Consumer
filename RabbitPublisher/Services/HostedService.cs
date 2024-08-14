@@ -5,7 +5,7 @@ using RabbitSender.Interfaces;
 namespace RabbitSender.Services;
 
 [SuppressMessage("ReSharper", "ConvertToPrimaryConstructor")]
-public class HostedService : IHostedService
+public class HostedService : BackgroundService
 {
     private readonly IPublisherService _publisherService;
 
@@ -14,14 +14,9 @@ public class HostedService : IHostedService
         _publisherService = publisherService;
     }
 
-    public Task StartAsync(CancellationToken cancellationToken)
+    protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _publisherService.PublishCountryData();
-        return Task.CompletedTask;
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
         return Task.CompletedTask;
     }
 }
