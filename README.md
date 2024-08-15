@@ -25,4 +25,4 @@ RabbitMQ is a message broker that allows applications to communicate by sending 
 - [.NET SDK](https://dotnet.microsoft.com/download) (version 8.0)
 - [RabbitMQ Server](https://www.rabbitmq.com/download.html) (version 3.x)
 
-Ensure that RabbitMQ is installed and running on your local machine or accessible from your environment.
+Ensure that RabbitMQ is installed and running on your local machine or accessible from your environment. (I use Docker with running image for Rabbit which listen on endpoint: https://localhost:8080)
