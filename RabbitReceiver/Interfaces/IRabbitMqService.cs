@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace RabbitSender.Interfaces;
+namespace RabbitReceiver1.Interfaces;
 
 public interface IRabbitMqService
 {

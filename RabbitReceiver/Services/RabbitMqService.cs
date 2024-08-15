@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
-using RabbitSender.Interfaces;
-using RabbitSender.Model;
+using RabbitReceiver1.Interfaces;
+using RabbitReceiver1.Model;
 
-namespace RabbitSender.Services;
+namespace RabbitReceiver1.Services;
 
 public class RabbitMqService : IRabbitMqService
 {
@@ -24,7 +24,7 @@ public class RabbitMqService : IRabbitMqService
         ConnectionFactory factory = new()
         {
             Uri = new Uri(_settings.RabbitMq!.RabbitUri),
-            ClientProvidedName = "Rabbit Publisher App"
+            ClientProvidedName = "Rabbit Receiver App"
         };
 
         var channel = factory.CreateConnection();

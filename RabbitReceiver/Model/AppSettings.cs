@@ -1,4 +1,4 @@
-﻿namespace RabbitSender.Model;
+﻿namespace RabbitReceiver1.Model;
 
 public class AppSettings
 {
